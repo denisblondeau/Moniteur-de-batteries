@@ -12,6 +12,8 @@
 		92851273290A185E00EFFB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92851272290A185E00EFFB5E /* Assets.xcassets */; };
 		92851276290A185E00EFFB5E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92851275290A185E00EFFB5E /* Preview Assets.xcassets */; };
 		92851280290A680500EFFB5E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9285127F290A680500EFFB5E /* README.md */; };
+		92851282290A699200EFFB5E /* BattteryMonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851281290A699200EFFB5E /* BattteryMonitorModel.swift */; };
+		92851284290A6A1400EFFB5E /* IOEventDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851283290A6A1400EFFB5E /* IOEventDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		92851275290A185E00EFFB5E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		92851277290A185E00EFFB5E /* Moniteur_de_batteries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moniteur_de_batteries.entitlements; sourceTree = "<group>"; };
 		9285127F290A680500EFFB5E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		92851281290A699200EFFB5E /* BattteryMonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattteryMonitorModel.swift; sourceTree = "<group>"; };
+		92851283290A6A1400EFFB5E /* IOEventDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOEventDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +60,11 @@
 			children = (
 				9285126E290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift */,
 				92851270290A185E00EFFB5E /* ContentView.swift */,
+				92851281290A699200EFFB5E /* BattteryMonitorModel.swift */,
+				92851283290A6A1400EFFB5E /* IOEventDetector.swift */,
+				9285127F290A680500EFFB5E /* README.md */,
 				92851272290A185E00EFFB5E /* Assets.xcassets */,
 				92851277290A185E00EFFB5E /* Moniteur_de_batteries.entitlements */,
-				9285127F290A680500EFFB5E /* README.md */,
 				92851274290A185E00EFFB5E /* Preview Content */,
 			);
 			path = "Moniteur de batteries";
@@ -143,7 +149,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92851284290A6A1400EFFB5E /* IOEventDetector.swift in Sources */,
 				92851271290A185E00EFFB5E /* ContentView.swift in Sources */,
+				92851282290A699200EFFB5E /* BattteryMonitorModel.swift in Sources */,
 				9285126F290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
