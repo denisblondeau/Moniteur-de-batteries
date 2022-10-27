@@ -9,9 +9,24 @@ import SwiftUI
 
 @main
 struct Moniteur_de_batteriesApp: App {
+    
+    @StateObject private var model = BattteryMonitorModel()
+    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        
+        MenuBarExtra(model.currentLevels) {
+            
+            Divider()
+            
+            Button("Quitter") {
+                model.invalidate()
+                NSApplication.shared.terminate(nil)
+            }
+            .keyboardShortcut("q")
+            
+            
+            Spacer()
         }
+//        .menuBarExtraStyle(.window)
     }
 }

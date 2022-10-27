@@ -85,7 +85,7 @@ final class IOEventDetector {
 
         let selfPtr = Unmanaged.passUnretained(self).toOpaque()
 
-        let addMatchError = IOServiceAddMatchingNotification(self.notifyPort, kIOFirstMatchNotification, matchingDict, matchCallback, selfPtr, &self.matchedIterator
+        let addMatchError = IOServiceAddMatchingNotification(self.notifyPort, kIOMatchedNotification, matchingDict, matchCallback, selfPtr, &self.matchedIterator
         )
         
         let addTermError = IOServiceAddMatchingNotification(self.notifyPort, kIOTerminatedNotification, matchingDict, termCallback, selfPtr, &self.terminatedIterator)
