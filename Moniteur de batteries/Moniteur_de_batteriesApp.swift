@@ -16,6 +16,8 @@ struct Moniteur_de_batteriesApp: App {
         
         MenuBarExtra(model.currentLevels) {
             
+            ContentView()
+            
             Divider()
             
             Button("Quitter") {
@@ -23,10 +25,10 @@ struct Moniteur_de_batteriesApp: App {
                 NSApplication.shared.terminate(nil)
             }
             .keyboardShortcut("q")
+            .padding()
             
-            
-            Spacer()
+          
         }
-//        .menuBarExtraStyle(.window)
+        .menuBarExtraStyle(.window)
     }
 }

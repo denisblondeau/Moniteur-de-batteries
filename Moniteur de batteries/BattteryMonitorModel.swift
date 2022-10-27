@@ -5,6 +5,7 @@
 //  Created by Denis Blondeau on 2022-10-27.
 //
 
+import Combine
 import Foundation
 
 final class BattteryMonitorModel: ObservableObject {
@@ -22,58 +23,72 @@ final class BattteryMonitorModel: ObservableObject {
         }
     }
     
-    private var eventDetector = IOEventDetector()
+    private var refreshLevelsTimer: AnyCancellable?
     
     init() {
-        eventDetector?.callbackQueue = DispatchQueue.global()
-        handleEventCallback()
+        retrieveData()
+        
+        // Refresh data every 15 mins.
+        refreshLevelsTimer = Timer.publish(every: 900, on: .main, in: .common)
+            .autoconnect()
+            .sink(receiveValue: {_ in
+                self.retrieveData()
+            })
     }
     
-    private func handleEventCallback() {
+    func invalidate() {
+        refreshLevelsTimer?.cancel()
+    }
+    
+    private func retrieveData() {
+        var serialPortIterator = io_iterator_t()
+        var object: io_service_t = 99
+        let masterPort: mach_port_t = kIOMainPortDefault
+        let matchingDict : CFDictionary = IOServiceMatching("AppleDeviceManagementHIDEventService")
+        let kernResult = IOServiceGetMatchingServices(masterPort, matchingDict, &serialPortIterator)
         
-        eventDetector?.callback = {(detector, event, service) in
-            print("Event \(event)")
-            
-            //TODO: Handle disconnected device
-            if event == .Terminated {
-                print("HANDLE DISCONNECTED DEVICE")
-            }
-            
-            if event == .Matched {
-                let productProperty = IORegistryEntryCreateCFProperty(service, "Product" as CFString, kCFAllocatorDefault, 0)
-                if (productProperty != nil) {
-                    let  productName = (productProperty?.takeRetainedValue() as? String)!
-                    let   percent = (IORegistryEntryCreateCFProperty(service, "BatteryPercent" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Int)!
+        if KERN_SUCCESS == kernResult {
+           repeat {
+                object = IOIteratorNext(serialPortIterator)
+                
+                if object != 0 {
                     
-                    if (productName == "Magic Mouse") {
-                        if percent != self.mouseBatteryLevel {
-                            DispatchQueue.main.async {
-                                self.mouseBatteryLevel = percent
+                    var percent = 0
+                    var productName = ""
+                    if let productProperty = IORegistryEntryCreateCFProperty(object, "Product" as CFString, kCFAllocatorDefault, 0) {
+                        productName =  productProperty.takeRetainedValue() as! String
+                        
+                        if let percentProperty = IORegistryEntryCreateCFProperty(object, "BatteryPercent" as CFString, kCFAllocatorDefault, 0) {
+                            percent = percentProperty.takeRetainedValue() as! Int
+                            
+                            if productName == "Magic Keyboard with Touch ID and Numeric Keypad" {
+                                DispatchQueue.main.async {
+                                    self.keyboardBatteryLevel = percent
+                                }
+                            }
+                            
+                            if (productName == "Magic Mouse") {
+                                DispatchQueue.main.async {
+                                    self.mouseBatteryLevel = percent
+                                }
                             }
                         }
                     }
-                    
-                    if (productName == "Magic Keyboard with Touch ID and Numeric Keypad") {
-                        if percent != self.keyboardBatteryLevel {
-                            DispatchQueue.main.async {
-                                self.keyboardBatteryLevel = percent
-                            }
-                        }
-                    }
-                    
-                    print("\(productName): \(percent)")
+                    IOObjectRelease(object)
+                } else {
+                    break
                 }
-            }
+               
+            } while true
+         
         }
-        
-        _ = eventDetector?.startDetection()
+        IOObjectRelease(serialPortIterator)
     }
     
     private func updateMenuBarExtraTitle() {
         
         var keyboardBatterySymbol = ""
         var mouseBatterySymbol = ""
-     
         
         switch keyboardBatteryLevel {
         case 0:
@@ -102,10 +117,6 @@ final class BattteryMonitorModel: ObservableObject {
         }
         
         currentLevels = "\(SFSymbol.keyboard.rawValue) \(keyboardBatteryLevel)% \(keyboardBatterySymbol)   \(SFSymbol.magicmouse.rawValue) \(mouseBatteryLevel)% \(mouseBatterySymbol)"
-        
     }
     
-    func invalidate() {
-        eventDetector = nil
-    }
 }
