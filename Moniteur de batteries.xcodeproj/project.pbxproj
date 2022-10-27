@@ -11,6 +11,7 @@
 		92851271290A185E00EFFB5E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851270290A185E00EFFB5E /* ContentView.swift */; };
 		92851273290A185E00EFFB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92851272290A185E00EFFB5E /* Assets.xcassets */; };
 		92851276290A185E00EFFB5E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92851275290A185E00EFFB5E /* Preview Assets.xcassets */; };
+		9285127E290A188900EFFB5E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9285127D290A188900EFFB5E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		92851272290A185E00EFFB5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92851275290A185E00EFFB5E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		92851277290A185E00EFFB5E /* Moniteur_de_batteries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moniteur_de_batteries.entitlements; sourceTree = "<group>"; };
+		9285127D290A188900EFFB5E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				9285126E290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift */,
 				92851270290A185E00EFFB5E /* ContentView.swift */,
 				92851272290A185E00EFFB5E /* Assets.xcassets */,
+				9285127D290A188900EFFB5E /* README.md */,
 				92851277290A185E00EFFB5E /* Moniteur_de_batteries.entitlements */,
 				92851274290A185E00EFFB5E /* Preview Content */,
 			);
@@ -127,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9285127E290A188900EFFB5E /* README.md in Resources */,
 				92851276290A185E00EFFB5E /* Preview Assets.xcassets in Resources */,
 				92851273290A185E00EFFB5E /* Assets.xcassets in Resources */,
 			);
@@ -274,7 +278,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Denis Blondeau. All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -301,7 +307,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Denis Blondeau. All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
