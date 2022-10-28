@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var keyboardPercentageThreshold = 5.0
-    @State private var keyboardNotificationEnabled = false
-    @State private var mousePercentageThreshold = 5.0
-    @State private var mouseNotificationEnabled = false
-    
+    @AppStorage("keyboardThreshold") private var keyboardPercentageThreshold = 10.0
+    @AppStorage("keyboardEnabled") private var keyboardNotificationEnabled = false
+    @AppStorage("mouseThreshold") private var mousePercentageThreshold = 10.0
+    @AppStorage("mouseEnabled") private var mouseNotificationEnabled = false
     
     var body: some View {
-        
         
         VStack {
             Text("Notifications")
@@ -28,14 +25,14 @@ struct ContentView: View {
             
             Slider(
                 value: $keyboardPercentageThreshold,
-                in: 1...10,
+                in: 1...20,
                 step: 1
             ) {
-             
+                
             } minimumValueLabel: {
                 Text("1%")
             } maximumValueLabel: {
-                Text("10%")
+                Text("20%")
             } onEditingChanged: { editing in
                 // keyboardIsEditing = editing
             }
@@ -44,29 +41,27 @@ struct ContentView: View {
             Text("\(String(format: "%.f", keyboardPercentageThreshold))%")
                 .foregroundColor(keyboardNotificationEnabled ? .green : .gray)
             
+            Divider()
+            
             Toggle("Souris", isOn: $mouseNotificationEnabled)
             
             Slider(
                 value: $mousePercentageThreshold,
-                in: 1...10,
+                in: 1...20,
                 step: 1
             ) {
-              
+                
             } minimumValueLabel: {
                 Text("1%")
             } maximumValueLabel: {
-                Text("10%")
-            } onEditingChanged: { editing in
-                // keyboardIsEditing = editing
+                Text("20%")
             }
             .disabled(!mouseNotificationEnabled)
             
             Text("\(String(format: "%.f", mousePercentageThreshold))%")
                 .foregroundColor(mouseNotificationEnabled ? .green : .gray)
-    
-    
         }
-        .padding()
+    
     }
 }
 

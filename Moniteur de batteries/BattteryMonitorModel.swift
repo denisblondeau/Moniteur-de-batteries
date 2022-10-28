@@ -24,15 +24,18 @@ final class BattteryMonitorModel: ObservableObject {
     }
     
     private var refreshLevelsTimer: AnyCancellable?
+    private let defaults = UserDefaults.standard
     
     init() {
         retrieveData()
+        setLocalNotification()
         
         // Refresh data every 15 mins.
         refreshLevelsTimer = Timer.publish(every: 900, on: .main, in: .common)
             .autoconnect()
             .sink(receiveValue: {_ in
                 self.retrieveData()
+                self.setLocalNotification()
             })
     }
     
@@ -117,6 +120,15 @@ final class BattteryMonitorModel: ObservableObject {
         }
         
         currentLevels = "\(SFSymbol.keyboard.rawValue) \(keyboardBatteryLevel)% \(keyboardBatterySymbol)   \(SFSymbol.magicmouse.rawValue) \(mouseBatteryLevel)% \(mouseBatterySymbol)"
+    }
+    
+    private func setLocalNotification() {
+        let keyboardPercentageThreshold = Int(defaults.double(forKey: "keyboardThreshold"))
+        let keyboardNotificationEnabled = defaults.bool(forKey: "keyboardEnabled")
+        let mousePercentageThreshold = Int(defaults.double(forKey: "mouseThreshold"))
+        let mouseNotificationEnabled = defaults.bool(forKey: "mouseEnabled")
+     
+        print(keyboardPercentageThreshold, keyboardNotificationEnabled, mousePercentageThreshold,mouseNotificationEnabled)
     }
     
 }
