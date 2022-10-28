@@ -128,7 +128,7 @@ final class BattteryMonitorModel: ObservableObject {
         let mousePercentageThreshold = Int(defaults.double(forKey: "mouseThreshold"))
         let mouseNotificationEnabled = defaults.bool(forKey: "mouseEnabled")
         
-        print(keyboardPercentageThreshold, keyboardNotificationEnabled, mousePercentageThreshold,mouseNotificationEnabled)
+      
     }
     
 }

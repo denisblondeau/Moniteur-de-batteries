@@ -14,6 +14,7 @@
 		92851280290A680500EFFB5E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9285127F290A680500EFFB5E /* README.md */; };
 		92851282290A699200EFFB5E /* BattteryMonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851281290A699200EFFB5E /* BattteryMonitorModel.swift */; };
 		92851286290A6E8A00EFFB5E /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851285290A6E8A00EFFB5E /* SFSymbols.swift */; };
+		9285128C290C523800EFFB5E /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9285128B290C523800EFFB5E /* LocalNotifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		9285127F290A680500EFFB5E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		92851281290A699200EFFB5E /* BattteryMonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattteryMonitorModel.swift; sourceTree = "<group>"; };
 		92851285290A6E8A00EFFB5E /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
+		9285128B290C523800EFFB5E /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		92851262290A185E00EFFB5E = {
 			isa = PBXGroup;
 			children = (
+				9285127F290A680500EFFB5E /* README.md */,
 				9285126D290A185E00EFFB5E /* Moniteur de batteries */,
 				9285126C290A185E00EFFB5E /* Products */,
 			);
@@ -61,8 +64,8 @@
 				9285126E290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift */,
 				92851270290A185E00EFFB5E /* ContentView.swift */,
 				92851281290A699200EFFB5E /* BattteryMonitorModel.swift */,
+				9285128B290C523800EFFB5E /* LocalNotifications.swift */,
 				92851285290A6E8A00EFFB5E /* SFSymbols.swift */,
-				9285127F290A680500EFFB5E /* README.md */,
 				92851272290A185E00EFFB5E /* Assets.xcassets */,
 				92851277290A185E00EFFB5E /* Moniteur_de_batteries.entitlements */,
 				92851274290A185E00EFFB5E /* Preview Content */,
@@ -152,6 +155,7 @@
 				92851271290A185E00EFFB5E /* ContentView.swift in Sources */,
 				92851286290A6E8A00EFFB5E /* SFSymbols.swift in Sources */,
 				92851282290A699200EFFB5E /* BattteryMonitorModel.swift in Sources */,
+				9285128C290C523800EFFB5E /* LocalNotifications.swift in Sources */,
 				9285126F290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

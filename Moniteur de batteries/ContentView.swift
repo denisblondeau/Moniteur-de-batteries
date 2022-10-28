@@ -13,61 +13,74 @@ struct ContentView: View {
     @AppStorage("mouseThreshold") private var mousePercentageThreshold = 10.0
     @AppStorage("mouseEnabled") private var mouseNotificationEnabled = false
     @EnvironmentObject private var model: BattteryMonitorModel
+    @StateObject private var localNotifications = LocalNotifications()
     
     var body: some View {
         
+        
+        
         VStack {
-            Text("Notifications")
-                .font(.title)
-            Text("Niveau de batterie sous le % indiqué")
-                .italic()
-            
-            Toggle("Clavier", isOn: $keyboardNotificationEnabled)
-            
-            Slider(
-                value: $keyboardPercentageThreshold,
-                in: 1...20,
-                step: 1
-            ) {
+            if localNotifications.authorized {
+                Text("Les notifications ne sont pas autorisées.")
+            } else {
+                Text("Notifications")
+                    .font(.title)
+                Text("Niveau de batterie sous le % indiqué")
+                    .italic()
                 
-            } minimumValueLabel: {
-                Text("1%")
-            } maximumValueLabel: {
-                Text("20%")
-            } onEditingChanged: { editing in
-                // keyboardIsEditing = editing
-            }
-            .disabled(!keyboardNotificationEnabled)
-            
-            Text("\(String(format: "%.f", keyboardPercentageThreshold))%")
-                .foregroundColor(keyboardNotificationEnabled ? .green : .gray)
-            
-            Divider()
-            
-            Toggle("Souris", isOn: $mouseNotificationEnabled)
-            
-            Slider(
-                value: $mousePercentageThreshold,
-                in: 1...20,
-                step: 1
-            ) {
+                Toggle("Clavier", isOn: $keyboardNotificationEnabled)
                 
-            } minimumValueLabel: {
-                Text("1%")
-            } maximumValueLabel: {
-                Text("20%")
-            }
-            .disabled(!mouseNotificationEnabled)
-            
-            Text("\(String(format: "%.f", mousePercentageThreshold))%")
-                .foregroundColor(mouseNotificationEnabled ? .green : .gray)
-            
-            Button("Mettre à jour immédiatement") {
-                model.setLocalNotifications()
+                Slider(
+                    value: $keyboardPercentageThreshold,
+                    in: 1...20,
+                    step: 1
+                ) {
+                    
+                } minimumValueLabel: {
+                    Text("1%")
+                } maximumValueLabel: {
+                    Text("20%")
+                } onEditingChanged: { editing in
+                    // keyboardIsEditing = editing
+                }
+                .disabled(!keyboardNotificationEnabled)
+                
+                Text("\(String(format: "%.f", keyboardPercentageThreshold))%")
+                    .foregroundColor(keyboardNotificationEnabled ? .green : .gray)
+                
+                Divider()
+                
+                Toggle("Souris", isOn: $mouseNotificationEnabled)
+                
+                Slider(
+                    value: $mousePercentageThreshold,
+                    in: 1...20,
+                    step: 1
+                ) {
+                    
+                } minimumValueLabel: {
+                    Text("1%")
+                } maximumValueLabel: {
+                    Text("20%")
+                }
+                .disabled(!mouseNotificationEnabled)
+                
+                Text("\(String(format: "%.f", mousePercentageThreshold))%")
+                    .foregroundColor(mouseNotificationEnabled ? .green : .gray)
+                
+                Button("Mettre à jour immédiatement") {
+                    model.setLocalNotifications()
+                }
             }
         }
+        
         .padding()
+        .task {
+            try? await localNotifications.requestAuthorization()
+            
+        }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
