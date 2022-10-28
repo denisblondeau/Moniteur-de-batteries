@@ -28,14 +28,14 @@ final class BattteryMonitorModel: ObservableObject {
     
     init() {
         retrieveData()
-        setLocalNotification()
+        setLocalNotifications()
         
         // Refresh data every 15 mins.
         refreshLevelsTimer = Timer.publish(every: 900, on: .main, in: .common)
             .autoconnect()
             .sink(receiveValue: {_ in
                 self.retrieveData()
-                self.setLocalNotification()
+                self.setLocalNotifications()
             })
     }
     
@@ -51,7 +51,7 @@ final class BattteryMonitorModel: ObservableObject {
         let kernResult = IOServiceGetMatchingServices(masterPort, matchingDict, &serialPortIterator)
         
         if KERN_SUCCESS == kernResult {
-           repeat {
+            repeat {
                 object = IOIteratorNext(serialPortIterator)
                 
                 if object != 0 {
@@ -81,9 +81,9 @@ final class BattteryMonitorModel: ObservableObject {
                 } else {
                     break
                 }
-               
+                
             } while true
-         
+            
         }
         IOObjectRelease(serialPortIterator)
     }
@@ -122,12 +122,12 @@ final class BattteryMonitorModel: ObservableObject {
         currentLevels = "\(SFSymbol.keyboard.rawValue) \(keyboardBatteryLevel)% \(keyboardBatterySymbol)   \(SFSymbol.magicmouse.rawValue) \(mouseBatteryLevel)% \(mouseBatterySymbol)"
     }
     
-    private func setLocalNotification() {
+    func setLocalNotifications() {
         let keyboardPercentageThreshold = Int(defaults.double(forKey: "keyboardThreshold"))
         let keyboardNotificationEnabled = defaults.bool(forKey: "keyboardEnabled")
         let mousePercentageThreshold = Int(defaults.double(forKey: "mouseThreshold"))
         let mouseNotificationEnabled = defaults.bool(forKey: "mouseEnabled")
-     
+        
         print(keyboardPercentageThreshold, keyboardNotificationEnabled, mousePercentageThreshold,mouseNotificationEnabled)
     }
     

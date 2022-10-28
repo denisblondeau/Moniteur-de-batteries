@@ -12,6 +12,7 @@ struct ContentView: View {
     @AppStorage("keyboardEnabled") private var keyboardNotificationEnabled = false
     @AppStorage("mouseThreshold") private var mousePercentageThreshold = 10.0
     @AppStorage("mouseEnabled") private var mouseNotificationEnabled = false
+    @EnvironmentObject private var model: BattteryMonitorModel
     
     var body: some View {
         
@@ -60,8 +61,12 @@ struct ContentView: View {
             
             Text("\(String(format: "%.f", mousePercentageThreshold))%")
                 .foregroundColor(mouseNotificationEnabled ? .green : .gray)
+            
+            Button("Mettre à jour immédiatement") {
+                model.setLocalNotifications()
+            }
         }
-    
+        .padding()
     }
 }
 

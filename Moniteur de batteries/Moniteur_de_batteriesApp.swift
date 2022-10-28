@@ -17,6 +17,7 @@ struct Moniteur_de_batteriesApp: App {
         MenuBarExtra(model.currentLevels) {
             
             ContentView()
+                .environmentObject(model)
             
             Divider()
             
