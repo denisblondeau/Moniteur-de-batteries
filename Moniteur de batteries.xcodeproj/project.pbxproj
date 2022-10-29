@@ -15,6 +15,7 @@
 		92851282290A699200EFFB5E /* BattteryMonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851281290A699200EFFB5E /* BattteryMonitorModel.swift */; };
 		92851286290A6E8A00EFFB5E /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851285290A6E8A00EFFB5E /* SFSymbols.swift */; };
 		9285128C290C523800EFFB5E /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9285128B290C523800EFFB5E /* LocalNotifications.swift */; };
+		9285128E290C5E5600EFFB5E /* CommonFieldsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9285128D290C5E5600EFFB5E /* CommonFieldsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		92851281290A699200EFFB5E /* BattteryMonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattteryMonitorModel.swift; sourceTree = "<group>"; };
 		92851285290A6E8A00EFFB5E /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
 		9285128B290C523800EFFB5E /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
+		9285128D290C5E5600EFFB5E /* CommonFieldsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFieldsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				9285126E290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift */,
 				92851270290A185E00EFFB5E /* ContentView.swift */,
 				92851281290A699200EFFB5E /* BattteryMonitorModel.swift */,
+				9285128D290C5E5600EFFB5E /* CommonFieldsModel.swift */,
 				9285128B290C523800EFFB5E /* LocalNotifications.swift */,
 				92851285290A6E8A00EFFB5E /* SFSymbols.swift */,
 				92851272290A185E00EFFB5E /* Assets.xcassets */,
@@ -155,6 +158,7 @@
 				92851271290A185E00EFFB5E /* ContentView.swift in Sources */,
 				92851286290A6E8A00EFFB5E /* SFSymbols.swift in Sources */,
 				92851282290A699200EFFB5E /* BattteryMonitorModel.swift in Sources */,
+				9285128E290C5E5600EFFB5E /* CommonFieldsModel.swift in Sources */,
 				9285128C290C523800EFFB5E /* LocalNotifications.swift in Sources */,
 				9285126F290A185E00EFFB5E /* Moniteur_de_batteriesApp.swift in Sources */,
 			);

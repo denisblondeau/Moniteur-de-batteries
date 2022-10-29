@@ -13,14 +13,11 @@ struct ContentView: View {
     @AppStorage("mouseThreshold") private var mousePercentageThreshold = 10.0
     @AppStorage("mouseEnabled") private var mouseNotificationEnabled = false
     @EnvironmentObject private var model: BattteryMonitorModel
-    @StateObject private var localNotifications = LocalNotifications()
     
     var body: some View {
         
-        
-        
         VStack {
-            if localNotifications.authorized {
+            if !model.localNotifications.authorized {
                 Text("Les notifications ne sont pas autorisées.")
             } else {
                 Text("Notifications")
@@ -68,17 +65,14 @@ struct ContentView: View {
                 Text("\(String(format: "%.f", mousePercentageThreshold))%")
                     .foregroundColor(mouseNotificationEnabled ? .green : .gray)
                 
-                Button("Mettre à jour immédiatement") {
+                Button("Mettre à jour maintenant") {
                     model.setLocalNotifications()
                 }
             }
         }
         
         .padding()
-        .task {
-            try? await localNotifications.requestAuthorization()
-            
-        }
+      
     }
     
 }

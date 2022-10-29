@@ -27,11 +27,7 @@ struct Moniteur_de_batteriesApp: App {
             }
             .keyboardShortcut("q")
             .padding()
-           
-           
-            
         }
         .menuBarExtraStyle(.window)
-        
     }
 }

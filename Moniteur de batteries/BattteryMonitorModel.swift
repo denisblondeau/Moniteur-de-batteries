@@ -11,22 +11,28 @@ import Foundation
 final class BattteryMonitorModel: ObservableObject {
     
     @Published private(set) var currentLevels = ""
-    
-    private var mouseBatteryLevel = 0 {
-        didSet {
-            updateMenuBarExtraTitle()
-        }
-    }
+    private let defaults = UserDefaults.standard
     private var keyboardBatteryLevel = 0 {
         didSet {
             updateMenuBarExtraTitle()
         }
     }
-    
+    private(set) var localNotifications: LocalNotifications!
+    private var mouseBatteryLevel = 0 {
+        didSet {
+            updateMenuBarExtraTitle()
+        }
+    }
+    var notifiedKeyboardThreshold = false
+    var notifiedMouseThreshold = false
     private var refreshLevelsTimer: AnyCancellable?
-    private let defaults = UserDefaults.standard
     
     init() {
+        Task {
+            await localNotifications = LocalNotifications()
+            try? await localNotifications.requestAuthorization()
+        }
+        
         retrieveData()
         setLocalNotifications()
         
@@ -127,8 +133,19 @@ final class BattteryMonitorModel: ObservableObject {
         let keyboardNotificationEnabled = defaults.bool(forKey: "keyboardEnabled")
         let mousePercentageThreshold = Int(defaults.double(forKey: "mouseThreshold"))
         let mouseNotificationEnabled = defaults.bool(forKey: "mouseEnabled")
+        let commonFields = CommonFieldsModel()
         
+        if keyboardNotificationEnabled  {
+            
+        }
       
+//        Task {
+//          do {
+//            try await localNotifications.sendNotification(model: commonFields)
+//          } catch {
+//            print(error.localizedDescription)
+//          }
+//        }
     }
     
 }
