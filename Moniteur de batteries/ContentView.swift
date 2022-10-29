@@ -65,14 +65,11 @@ struct ContentView: View {
                 Text("\(String(format: "%.f", mousePercentageThreshold))%")
                     .foregroundColor(mouseNotificationEnabled ? .green : .gray)
                 
-                Button("Mettre à jour maintenant") {
-                    model.setLocalNotifications()
-                }
             }
         }
         
         .padding()
-      
+        
     }
     
 }

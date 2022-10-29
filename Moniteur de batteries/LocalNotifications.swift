@@ -15,15 +15,23 @@ final class LocalNotifications: NSObject, ObservableObject {
     private let center = UNUserNotificationCenter.current()
     
     func requestAuthorization() async throws {
-        authorized = try await center.requestAuthorization(options: [.badge, .sound, .alert])
+        authorized = try await center.requestAuthorization(options: [.alert])
     }
     
     func sendNotification(model: CommonFieldsModel) async throws {
         
         let title = model.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let subtitle = model.subtitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        let body = model.body.trimmingCharacters(in: .whitespacesAndNewlines)
         
         let content = UNMutableNotificationContent()
         content.title = title.isEmpty ? "No Title Provided" : title
+        if !subtitle.isEmpty {
+            content.subtitle = subtitle
+        }
+        if !body.isEmpty {
+            content.body = body
+        }
         
         if model.hasSound {
             content.sound = UNNotificationSound.default

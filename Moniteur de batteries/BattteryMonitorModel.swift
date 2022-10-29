@@ -31,17 +31,18 @@ final class BattteryMonitorModel: ObservableObject {
         Task {
             await localNotifications = LocalNotifications()
             try? await localNotifications.requestAuthorization()
+            await retrieveData()
+            await setLocalNotifications()
         }
-        
-        retrieveData()
-        setLocalNotifications()
         
         // Refresh data every 15 mins.
         refreshLevelsTimer = Timer.publish(every: 900, on: .main, in: .common)
             .autoconnect()
             .sink(receiveValue: {_ in
-                self.retrieveData()
-                self.setLocalNotifications()
+                Task {
+                    await self.retrieveData()
+                    await self.setLocalNotifications()
+                }
             })
     }
     
@@ -49,7 +50,7 @@ final class BattteryMonitorModel: ObservableObject {
         refreshLevelsTimer?.cancel()
     }
     
-    private func retrieveData() {
+    private func retrieveData() async {
         var serialPortIterator = io_iterator_t()
         var object: io_service_t = 99
         let masterPort: mach_port_t = kIOMainPortDefault
@@ -71,15 +72,12 @@ final class BattteryMonitorModel: ObservableObject {
                             percent = percentProperty.takeRetainedValue() as! Int
                             
                             if productName == "Magic Keyboard with Touch ID and Numeric Keypad" {
-                                DispatchQueue.main.async {
-                                    self.keyboardBatteryLevel = percent
-                                }
+                                keyboardBatteryLevel = percent
                             }
                             
                             if (productName == "Magic Mouse") {
-                                DispatchQueue.main.async {
-                                    self.mouseBatteryLevel = percent
-                                }
+                                mouseBatteryLevel = percent
+                                
                             }
                         }
                     }
@@ -125,27 +123,51 @@ final class BattteryMonitorModel: ObservableObject {
             mouseBatterySymbol = SFSymbol.batteryLevel100.rawValue
         }
         
-        currentLevels = "\(SFSymbol.keyboard.rawValue) \(keyboardBatteryLevel)% \(keyboardBatterySymbol)   \(SFSymbol.magicmouse.rawValue) \(mouseBatteryLevel)% \(mouseBatterySymbol)"
+        DispatchQueue.main.async {
+            self.currentLevels = "\(SFSymbol.keyboard.rawValue) \(self.keyboardBatteryLevel)% \(keyboardBatterySymbol)   \(SFSymbol.magicmouse.rawValue) \(self.mouseBatteryLevel)% \(mouseBatterySymbol)"
+        }
     }
     
-    func setLocalNotifications() {
+    private func setLocalNotifications() async {
         let keyboardPercentageThreshold = Int(defaults.double(forKey: "keyboardThreshold"))
         let keyboardNotificationEnabled = defaults.bool(forKey: "keyboardEnabled")
         let mousePercentageThreshold = Int(defaults.double(forKey: "mouseThreshold"))
         let mouseNotificationEnabled = defaults.bool(forKey: "mouseEnabled")
-        let commonFields = CommonFieldsModel()
-        
+        let fields = CommonFieldsModel()
+     
         if keyboardNotificationEnabled  {
-            
+            if keyboardBatteryLevel < keyboardPercentageThreshold {
+                fields.title = "Le niveau de la batterie du clavier est sous \(keyboardPercentageThreshold)% - La notification pour le clavier est désactivée."
+                defaults.set(false, forKey: "keyboardEnabled")
+                Task {
+                    do {
+                        try await localNotifications.sendNotification(model: fields)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
-      
-//        Task {
-//          do {
-//            try await localNotifications.sendNotification(model: commonFields)
-//          } catch {
-//            print(error.localizedDescription)
-//          }
-//        }
+        
+        if mouseNotificationEnabled  {
+            if mouseBatteryLevel < mousePercentageThreshold {
+                fields.title = "Le niveau de la batterie de la souris est sous \(keyboardPercentageThreshold)% - La notification pour la souris est désactivée."
+                defaults.set(false, forKey: "mouseEnabled")
+                Task {
+                    do {
+                        try await localNotifications.sendNotification(model: fields)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
     }
     
 }
