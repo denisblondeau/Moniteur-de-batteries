@@ -137,7 +137,7 @@ final class BattteryMonitorModel: ObservableObject {
      
         if keyboardNotificationEnabled  {
             if keyboardBatteryLevel < keyboardPercentageThreshold {
-                fields.title = "Le niveau de la batterie du clavier est sous \(keyboardPercentageThreshold)% - La notification pour le clavier est désactivée."
+                fields.title = "Le niveau de la batterie du clavier est sous \(keyboardPercentageThreshold)% - La notification pour le clavier est maintenant désactivée."
                 defaults.set(false, forKey: "keyboardEnabled")
                 Task {
                     do {
@@ -151,7 +151,7 @@ final class BattteryMonitorModel: ObservableObject {
         
         if mouseNotificationEnabled  {
             if mouseBatteryLevel < mousePercentageThreshold {
-                fields.title = "Le niveau de la batterie de la souris est sous \(keyboardPercentageThreshold)% - La notification pour la souris est désactivée."
+                fields.title = "Le niveau de la batterie de la souris est sous \(keyboardPercentageThreshold)% - La notification pour la souris est maintenant désactivée."
                 defaults.set(false, forKey: "mouseEnabled")
                 Task {
                     do {
@@ -163,6 +163,27 @@ final class BattteryMonitorModel: ObservableObject {
             }
         }
         
+        if (keyboardBatteryLevel == 100) && !keyboardNotificationEnabled {
+            fields.title = "Le niveau de la batterie du clavier est maintenant à 100% - Veuillez réactiver la notification pour le clavier."
+            Task {
+                do {
+                    try await localNotifications.sendNotification(model: fields)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        if (mouseBatteryLevel == 100) && !mouseNotificationEnabled {
+            fields.title = "Le niveau de la batterie de la souris est maintenant à 100% - Veuillez réactiver la notification pour la souris."
+            Task {
+                do {
+                    try await localNotifications.sendNotification(model: fields)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
         
         
         
