@@ -23,8 +23,7 @@ final class BattteryMonitorModel: ObservableObject {
             updateMenuBarExtraTitle()
         }
     }
-    var notifiedKeyboardThreshold = false
-    var notifiedMouseThreshold = false
+  
     private var refreshLevelsTimer: AnyCancellable?
     
     init() {
@@ -52,10 +51,9 @@ final class BattteryMonitorModel: ObservableObject {
     
     private func retrieveData() async {
         var serialPortIterator = io_iterator_t()
-        var object: io_service_t = 99
-        let masterPort: mach_port_t = kIOMainPortDefault
+        var object: io_service_t = 0
         let matchingDict : CFDictionary = IOServiceMatching("AppleDeviceManagementHIDEventService")
-        let kernResult = IOServiceGetMatchingServices(masterPort, matchingDict, &serialPortIterator)
+        let kernResult = IOServiceGetMatchingServices(kIOMainPortDefault, matchingDict, &serialPortIterator)
         
         if KERN_SUCCESS == kernResult {
             repeat {
