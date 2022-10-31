@@ -68,6 +68,12 @@ struct ContentView: View {
             }
         }
         .padding()
+        .onChange(of: model.localNotifications.authorized) { authorized in
+            if !authorized {
+                keyboardNotificationEnabled = false
+                mouseNotificationEnabled = false
+            }
+        }
     }
 }
 
