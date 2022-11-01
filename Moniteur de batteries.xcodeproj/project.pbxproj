@@ -16,6 +16,7 @@
 		92851286290A6E8A00EFFB5E /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92851285290A6E8A00EFFB5E /* SFSymbols.swift */; };
 		9285128C290C523800EFFB5E /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9285128B290C523800EFFB5E /* LocalNotifications.swift */; };
 		9285128E290C5E5600EFFB5E /* CommonFieldsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9285128D290C5E5600EFFB5E /* CommonFieldsModel.swift */; };
+		92ED7FBB29113D1C007F0268 /* Demo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 92ED7FBA29113D1C007F0268 /* Demo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		92851285290A6E8A00EFFB5E /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
 		9285128B290C523800EFFB5E /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
 		9285128D290C5E5600EFFB5E /* CommonFieldsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFieldsModel.swift; sourceTree = "<group>"; };
+		92ED7FBA29113D1C007F0268 /* Demo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Demo.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				9285127F290A680500EFFB5E /* README.md */,
+				92ED7FBA29113D1C007F0268 /* Demo.jpg */,
 				9285126D290A185E00EFFB5E /* Moniteur de batteries */,
 				9285126C290A185E00EFFB5E /* Products */,
 			);
@@ -142,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92ED7FBB29113D1C007F0268 /* Demo.jpg in Resources */,
 				92851280290A680500EFFB5E /* README.md in Resources */,
 				92851276290A185E00EFFB5E /* Preview Assets.xcassets in Resources */,
 				92851273290A185E00EFFB5E /* Assets.xcassets in Resources */,
