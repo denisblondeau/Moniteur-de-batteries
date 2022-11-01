@@ -25,7 +25,7 @@ final class LocalNotifications: NSObject, ObservableObject {
         let body = model.body.trimmingCharacters(in: .whitespacesAndNewlines)
         
         let content = UNMutableNotificationContent()
-        content.title = title.isEmpty ? "No Title Provided" : title
+        content.title = title.isEmpty ? "Pas de titre fourni" : title
         if !subtitle.isEmpty {
             content.subtitle = subtitle
         }
