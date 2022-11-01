@@ -1,2 +1,9 @@
 # Moniteur de batteries
-Indicateur de niveau de batteries pour souris et clavier.
+
+Démo SwiftUI pour MacOS - Indicateur de niveau de batteries pour souris et clavier Apple (i.e. Magic Keyboard et Magic Mouse).
+
+ - Application résidant dans la barre de menu de MacOS (https://developer.apple.com/documentation/swiftui/menubarextra)
+ 
+ - L'application permet égallement de recevoir des notifications locales lorsque le niveau des batteries est sous un certain niveau. Les données sont mises à jour à toutes les 15 minutes. (https://developer.apple.com/documentation/usernotifications)
+ 
+  - Dévelopé avec Xcode v14.1 (RC2) sur MacOS Ventura (13.0)

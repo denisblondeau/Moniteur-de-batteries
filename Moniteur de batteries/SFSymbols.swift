@@ -5,6 +5,8 @@
 //  Created by Denis Blondeau on 2022-10-27.
 //
 
+// SF Symbols are copyrighted by Apple Inc.
+
 import Foundation
 
 enum SFSymbol: String {
