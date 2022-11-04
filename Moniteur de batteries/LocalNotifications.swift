@@ -20,9 +20,9 @@ final class LocalNotifications: NSObject, ObservableObject {
     
     func sendNotification(model: CommonFieldsModel) async throws {
         
-        let title = model.title.trimmingCharacters(in: .whitespacesAndNewlines)
-        let subtitle = model.subtitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        let body = model.body.trimmingCharacters(in: .whitespacesAndNewlines)
+        let title = model.title.trim()
+        let subtitle = model.subtitle.trim()
+        let body = model.body.trim()
         
         let content = UNMutableNotificationContent()
         content.title = title.isEmpty ? "Pas de titre fourni" : title
@@ -46,5 +46,15 @@ final class LocalNotifications: NSObject, ObservableObject {
         
         try await center.add(request)
         
+    }
+}
+
+
+extension String {
+    
+    /// Returns a new string made by removing from both ends of the String characters contained in a given character set.
+    /// - Returns: Trimmed string.
+    func trim() -> String {
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }

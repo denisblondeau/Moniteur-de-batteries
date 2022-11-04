@@ -92,34 +92,24 @@ final class BattteryMonitorModel: ObservableObject {
     
     private func updateMenuBarExtraTitle() {
         
-        var keyboardBatterySymbol = ""
-        var mouseBatterySymbol = ""
-        
-        switch keyboardBatteryLevel {
-        case 0:
-            keyboardBatterySymbol = SFSymbol.batteryLevel0.rawValue
-        case 1...25:
-            keyboardBatterySymbol = SFSymbol.batteryLevel25.rawValue
-        case 26...50:
-            keyboardBatterySymbol = SFSymbol.batteryLevel50.rawValue
-        case 51...75:
-            keyboardBatterySymbol = SFSymbol.batteryLevel75.rawValue
-        default:
-            keyboardBatterySymbol = SFSymbol.batteryLevel100.rawValue
+        func batterySymbol(for batteryLevel: Int) -> String {
+            
+            switch batteryLevel {
+            case 0:
+                return SFSymbol.batteryLevel0.rawValue
+            case 1...25:
+                return SFSymbol.batteryLevel25.rawValue
+            case 26...50:
+                return SFSymbol.batteryLevel50.rawValue
+            case 51...75:
+                return SFSymbol.batteryLevel75.rawValue
+            default:
+                return SFSymbol.batteryLevel100.rawValue
+            }
         }
         
-        switch mouseBatteryLevel {
-        case 0:
-            mouseBatterySymbol = SFSymbol.batteryLevel0.rawValue
-        case 1...25:
-            mouseBatterySymbol = SFSymbol.batteryLevel25.rawValue
-        case 26...50:
-            mouseBatterySymbol = SFSymbol.batteryLevel50.rawValue
-        case 51...75:
-            mouseBatterySymbol = SFSymbol.batteryLevel75.rawValue
-        default:
-            mouseBatterySymbol = SFSymbol.batteryLevel100.rawValue
-        }
+        let keyboardBatterySymbol = batterySymbol(for: keyboardBatteryLevel)
+        let mouseBatterySymbol = batterySymbol(for: mouseBatteryLevel)
         
         DispatchQueue.main.async {
             self.currentLevels = "\(SFSymbol.keyboard.rawValue) \(self.keyboardBatteryLevel)% \(keyboardBatterySymbol)   \(SFSymbol.magicmouse.rawValue) \(self.mouseBatteryLevel)% \(mouseBatterySymbol)"
