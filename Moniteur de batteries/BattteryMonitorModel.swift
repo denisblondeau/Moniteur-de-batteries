@@ -139,7 +139,7 @@ final class BattteryMonitorModel: ObservableObject {
         
         if mouseNotificationEnabled  {
             if mouseBatteryLevel < mousePercentageThreshold {
-                fields.title = "Le niveau de la batterie de la souris est sous \(keyboardPercentageThreshold)% - La notification pour la souris est maintenant désactivée."
+                fields.title = "Le niveau de la batterie de la souris est sous \(mousePercentageThreshold)% - La notification pour la souris est maintenant désactivée."
                 defaults.set(false, forKey: "mouseEnabled")
                 Task {
                     do {
